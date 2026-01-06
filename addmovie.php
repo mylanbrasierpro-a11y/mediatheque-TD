@@ -15,13 +15,14 @@
     <label for="realisateur">Votre realisateur:</label>
     <input type="text" name='realisateur' id="realisateur">
     <label for="genre">Genre:</label>
-    <input type="text" name='genre' id="genre">
+    <input type="checbox" name='genre' id="genre">
     <label for="duree">Durée:</label>
     <input type="text" name='duree' id="duree">
     <label for="synopsis">synopsis:</label>
     <input type="text" name='synopsis' id="synopsis">
     <button>Valider</button>
     </form> 
+
     <?php
     if(isset($_POST['titre']) AND isset($_POST['realisateur']) AND isset($_POST['genre']) AND isset($_POST['duree']) AND isset($_POST['synopsis'])) {
             $titre = htmlspecialchars($_POST['titre']);
@@ -29,8 +30,6 @@
             $genre = htmlspecialchars($_POST['genre'],);
             $duree = htmlspecialchars($_POST['duree']);
             $synopsis = htmlspecialchars($_POST['synopsis']);
-
-
 
             $adding = $bdd->prepare('INSERT INTO film (titre, realisateur, genre, duree, synopsis) VALUES (?,?,?,?,?)');
             $adding->execute([$titre , $realisateur , $genre , $duree , $synopsis]);

@@ -9,31 +9,36 @@
     <title>Document</title>
 </head>
 <body>
-    <?php 
-
-    $request = $bdd->prepare('SELECT prenom,nom FROM user ');
-    $request->execute(array());
-    while($data = $request->fetch()){
-        echo'<p>Bonjour ' . $data['prenom'] ." ". $data['nom']. '</p>';
-    }
-    ?>
+    
     <form action="index.php" method='POST'>
         <label for="prenom">Votre prenom:</label>
         <input type="text" name='prenom' id="prenom">
         <label for="transport">Votre nom:</label>
         <input type="text" name='nom' id="nom">
+        <label for="password">mots de passe :</label>
+        <input type="text" name='password' id="password">
         <input type="submit" value="Validez">
     </form> 
-         <?php 
-        
+
+        <?php 
         if(isset($_POST['nom']) && isset($_POST['prenom'])) {
             $nom = htmlspecialchars($_POST['nom']);
             $prenom = htmlspecialchars($_POST['prenom']);
+            $password = password_hash($_POST['password'] , PASSWORD_ARGON2I);
 
-            $adding = $bdd->prepare('INSERT INTO user (nom, prenom) VALUES (?,?)');
-            $adding->execute([$nom, $prenom]);
+            $adding = $bdd->prepare('INSERT INTO user (nom, prenom, password) VALUES (?,?,?)');
+            $adding->execute([$nom, $prenom, $password]);
         }
         ?>
     <a href="addmovie.php">ajouter un film</a>
+
+    <?php 
+    $request = $bdd->prepare('SELECT titre,duree FROM film ');
+    $request->execute(array());
+    while($data = $request->fetch()){
+        echo $data['titre'].' '. $data['duree'] . '</p>';
+    }
+    ?>
+        <a href="movielist.php">Liste des films</a>
 </body>
 </html>
