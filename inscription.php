@@ -1,3 +1,6 @@
+<?php
+    $bdd = new PDO('mysql:host=localhost;dbname=mediatheque;charset=utf8','root');
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

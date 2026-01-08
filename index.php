@@ -9,27 +9,8 @@
     <title>Document</title>
 </head>
 <body>
-    
-    <form action="index.php" method='POST'>
-        <label for="prenom">Votre prenom:</label>
-        <input type="text" name='prenom' id="prenom">
-        <label for="transport">Votre nom:</label>
-        <input type="text" name='nom' id="nom">
-        <label for="password">mots de passe :</label>
-        <input type="text" name='password' id="password">
-        <input type="submit" value="Validez">
-    </form> 
-
-        <?php 
-        if(isset($_POST['nom']) && isset($_POST['prenom'])) {
-            $nom = htmlspecialchars($_POST['nom']);
-            $prenom = htmlspecialchars($_POST['prenom']);
-            $password = password_hash($_POST['password'] , PASSWORD_ARGON2I);
-
-            $adding = $bdd->prepare('INSERT INTO user (nom, prenom, password) VALUES (?,?,?)');
-            $adding->execute([$nom, $prenom, $password]);
-        }
-        ?>
+    <a href="inscription.php">inscrivez-vous</a>
+    <a href="connexion.php">connectez-vous</a>
     <a href="addmovie.php">ajouter un film</a>
 
     <?php 

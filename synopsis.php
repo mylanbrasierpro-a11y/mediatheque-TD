@@ -10,11 +10,12 @@
 </head>
 <body>
     <?php
-        $request = $bdd->prepare('SELECT titre,duree,id FROM film ');
-        $request->execute(array());
+        $id = htmlspecialchars($_GET['id']);
+        $request = $bdd->prepare("SELECT synopsis FROM film WHERE id = :id ");
+        $request->execute(array('id'=>$id));
         while($data = $request->fetch()){
-        echo $data['titre'].' '. $data['duree'] . '</p>' . '<a href="synopsis.php?id='.$data['id'].'">voir +</a>';
-    }
+            echo $data['synopsis'] . '</p>';
+        }
     ?>
 </body>
 </html>
